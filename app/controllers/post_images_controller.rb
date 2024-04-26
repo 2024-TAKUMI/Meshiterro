@@ -14,12 +14,12 @@ class PostImagesController < ApplicationController
   end
 
   def index
-    @post_images = PostImage.all
+    @user = current_user
+    @post_images = @user.post_images
   end
 
   def show
-    @user = User.find(params[:id])
-    @post_images = @user.post_images
+    @post_image = PostImage.find(params[:id])
   end
 
   def destroy
@@ -28,7 +28,9 @@ class PostImagesController < ApplicationController
     redirect_to post_images_path
   end
 
-
+  def edit
+    @user = User.find(params[:id])
+  end
 
   private
 
